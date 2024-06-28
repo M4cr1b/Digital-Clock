@@ -1,20 +1,25 @@
-from tkinter import Tk
+import tkinter as tk
 from tkinter import Label
-import time 
-import sys
+from time import strftime
 
-master = Tk()
-master.title("Digital Clock")
+def time():
+    time_string = strftime('%H:%M:%S %p')
+    date_string = strftime('%A, %B %d, %Y')
+    label_time.config(text=time_string)
+    label_date.config(text=date_string)
+    label_time.after(1000, time)
 
-def get_time():
-    timeVar = time.strftime("%I:%M:%S %p")
-    clock.config(text=timeVar)
-    clock.after(200,get_time)
+root = tk.Tk()
+root.title('Digital Clock')
 
-Label(master, font=("Arial",30), text="Digital Clock", fg="white", bg="grey").pack()
-clock = Label(master, font=("Calibri", 90), bg="grey", fg="white")
-clock.pack()
+Label(root, font=("Courier New",30, "bold"), text="Digital Clock", fg="white", bg="grey").pack()
 
-get_time()      
+label_time = tk.Label(root, font=('calibri', 40, 'bold'), background='grey', foreground='white')
+label_time.pack(anchor='center')
 
-master.mainloop()
+label_date = tk.Label(root, font=('calibri', 40, 'bold'), background='grey', foreground='white')
+label_date.pack(anchor='center')
+
+time()
+
+root.mainloop()
